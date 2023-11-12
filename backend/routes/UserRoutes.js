@@ -52,7 +52,7 @@ UserRouter.post(
         });
 
         const data = {
-          from: " Amazona <me@eg.yourdomain.com>",
+          from: " MyEcommerceApp <gampasudarshananil@gmail.com>",
           to: `${user.name} <${user.email}>`,
           subject: "Reset Password",
           html: `<p>Please check the following link to reset your password</p>
@@ -88,6 +88,7 @@ UserRouter.post(
           if (err) {
             res.status(401).send({ message: "Invalid token" });
           } else {
+            console.log(req.body.token);
             const user = await User.findOne({ resetToken: req.body.token });
             if (user) {
               if (req.body.password) {
@@ -110,7 +111,6 @@ UserRouter.post(
 
 UserRouter.post(
   "/signup",
-  isAuth,
   expressAsyncHandler(async (req, res) => {
     try {
       const newUser = new User({
