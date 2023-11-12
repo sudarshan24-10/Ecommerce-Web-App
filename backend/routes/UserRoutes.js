@@ -80,28 +80,25 @@ UserRouter.post(
 UserRouter.post(
   "/reset-password",
   expressAsyncHandler(async (req, res) => {
+    console.log(req.body.token);
+    const token = req.body.token.substring(0, req.body.token.length - 1);
     try {
-      jwt.verify(
-        req.body.token,
-        process.env.JWT_SECRET,
-        async (err, decode) => {
-          if (err) {
-            res.status(401).send({ message: "Invalid token" });
-          } else {
-            console.log(req.body.token);
-            const user = await User.findOne({ resetToken: req.body.token });
-            if (user) {
-              if (req.body.password) {
-                user.password = bcrypt.hashSync(req.body.password, 8);
-                await user.save();
-                res.send({ message: "Password reset Successful" });
-              } else {
-                res.status(404).send({ message: "user not found" });
-              }
+      jwt.verify(token, process.env.JWT_SECRET, async (err, decode) => {
+        if (err) {
+          res.status(401).send({ message: "Invalid token" });
+        } else {
+          const user = await User.findOne({ resetToken: token });
+          if (user) {
+            if (req.body.password) {
+              user.password = bcrypt.hashSync(req.body.password, 8);
+              await user.save();
+              res.send({ message: "Password reset Successful" });
+            } else {
+              res.status(404).send({ message: "user not found" });
             }
           }
         }
-      );
+      });
     } catch (error) {
       console.error(error);
       res.status(500).send({ message: "Internal Server Error" });
