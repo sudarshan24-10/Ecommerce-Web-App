@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 import User from "../Models/UserModel.js";
 import mailgun from "mailgun-js";
 import jwt from "jsonwebtoken";
-import { isAuth, generateToken, baseUrl } from "../utils.js";
+import { isAuth, generateToken } from "../utils.js";
 const UserRouter = express.Router();
 
 UserRouter.post(
@@ -56,7 +56,7 @@ UserRouter.post(
           to: `${user.name} <${user.email}>`,
           subject: "Reset Password",
           html: `<p>Please check the following link to reset your password</p>
-        <a href="${baseUrl()}/reset-password/${token}}">reset password</a>`,
+        <a href="${process.env.BASE_URL}/reset-password/${token}}">reset password</a>`,
         };
 
         mg.messages().send(data, (error, body) => {
