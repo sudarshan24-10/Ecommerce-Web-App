@@ -123,6 +123,10 @@ export default function SearchScreen() {
     fetchCategories();
   }, [dispatch]);
 
+  useEffect(() => {
+    console.log(products);
+  }, [products]);
+
   const getFilterUrl = (filter, skipPathname) => {
     const filterPage = filter.page || page;
     const filterCategory = filter.category || category;
