@@ -146,8 +146,8 @@ function App() {
               <Nav.Item key={category}>
                 <LinkContainer
                   to={{
-                    pathname: "/search",
-                    search: "?category=abcd",
+                    pathname: '/search',
+                    search: `?category=${category}`,
                   }}
                   onClick={() => setSidebarIsOpen(false)}
                 >

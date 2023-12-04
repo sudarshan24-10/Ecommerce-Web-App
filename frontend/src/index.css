@@ -87,14 +87,16 @@ h1 {
   height: 100%;
   position: absolute;
   left: -300px;
-  background-color: #100901;
+  background-color:#404040;
   transition: 0.5s;
 }
+
+
 .site-container {
   transition: 0.4s;
 }
 .active-cont {
-  margin-left: 230px;
+  margin-left: 50px;
 }
 .active-nav {
   left: 0;

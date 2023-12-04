@@ -21,44 +21,26 @@ const PAGE_SIZE = 3;
 productRouter.get(
   "/search",
   expressAsyncHandler(async (req, res) => {
+    console.log(req)
     try {
       const { query } = req;
       const pageSize = query.pageSize || PAGE_SIZE;
-      const page = query.page || 1;
+      const page =query.page || 1;
       const category = query.category || "";
+      const brand = query.brand || '';
       const price = query.price || "";
       const rating = query.rating || "";
       const order = query.order || "";
       const searchQuery = query.query || "";
-      console.log(query);
-      const queryFilter =
-        searchQuery && searchQuery !== "all"
-          ? {
-              name: {
-                $regex: searchQuery,
-                $options: "i",
-              },
-            }
-          : {};
+      console.log(searchQuery)
+      const queryFilter = searchQuery && searchQuery !== "all" ? { name: { $regex: searchQuery, $options: "i" }, } : {};
       const categoryFilter = category && category !== "all" ? { category } : {};
-      const ratingFilter =
-        rating && rating !== "all"
-          ? {
-              rating: {
-                $gte: Number(rating),
-              },
-            }
-          : {};
+      const ratingFilter = rating && rating!== "all" ? { rating: { $gte: Number(rating) } } : {};
       const priceFilter =
         price && price !== "all"
-          ? {
-              // 1-50
-              price: {
-                $gte: Number(price.split("-")[0]),
-                $lte: Number(price.split("-")[1]),
-              },
-            }
+          ? { price: { $gte: Number(price.split("-")[0]), $lte: Number(price.split("-")[1]) } }
           : {};
+
       const sortOrder =
         order === "featured"
           ? { featured: -1 }
@@ -71,23 +53,26 @@ productRouter.get(
           : order === "newest"
           ? { createdAt: -1 }
           : { _id: -1 };
+      console.log(queryFilter,categoryFilter,ratingFilter,priceFilter)
 
+      const queryiFilter = { name: 'Nike Slim Pant' }
       const products = await Product.find({
         ...queryFilter,
         ...categoryFilter,
-        ...priceFilter,
         ...ratingFilter,
+        ...priceFilter,
       })
         .sort(sortOrder)
         .skip(pageSize * (page - 1))
         .limit(pageSize);
-
+      console.log(products)
       const countProducts = await Product.countDocuments({
         ...queryFilter,
         ...categoryFilter,
-        ...priceFilter,
         ...ratingFilter,
+        ...priceFilter,
       });
+
       res.send({
         products,
         countProducts,
@@ -95,6 +80,7 @@ productRouter.get(
         pages: Math.ceil(countProducts / pageSize),
       });
     } catch (error) {
+      console.error(error);
       res.status(500).send({ message: "Internal Server Error" });
     }
   })
