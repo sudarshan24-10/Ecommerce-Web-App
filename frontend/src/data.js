@@ -36,6 +36,7 @@ const data = {
       numReviews: 14,
       description: "high quality product",
     },
+    
     {
       name: "Adidas Fit Pant",
       slug: "adidas-fit-pant",
