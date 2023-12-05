@@ -1,40 +1,43 @@
-import { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { Store } from "../Store";
-import { toast } from "react-toastify";
-import axios from "axios";
-import { getError } from "../utils";
-import Container from "react-bootstrap/Container";
-import { Helmet } from "react-helmet-async";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import Axios from 'axios';
+import { useContext, useEffect, useState } from 'react';
+import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import { Helmet } from 'react-helmet-async';
+import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { Store } from '../Store';
+import { getError } from '../utils';
+
 export default function ResetPasswordScreen() {
   const navigate = useNavigate();
   const { token } = useParams();
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfrimPassword] = useState("");
+
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
   const { state } = useContext(Store);
   const { userInfo } = state;
 
   useEffect(() => {
     if (userInfo || !token) {
-      navigate("/");
+      navigate('/');
     }
   }, [navigate, userInfo, token]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      toast.error("Passwords do not match");
+      toast.error('Passwords do not match');
       return;
     }
     try {
-      await axios.post("/api/users/reset-password", {
+      await Axios.post('/api/users/reset-password', {
         password,
         token,
       });
-      navigate("/signin");
-      toast.success("password reset successfully");
+      navigate('/signin');
+      toast.success('Password updated successfully');
     } catch (err) {
       toast.error(getError(err));
     }
@@ -43,7 +46,7 @@ export default function ResetPasswordScreen() {
   return (
     <Container className="small-container">
       <Helmet>
-        <title>reset Password</title>
+        <title>Reset Password</title>
       </Helmet>
       <h1 className="my-3">Reset Password</h1>
       <Form onSubmit={submitHandler}>
@@ -52,21 +55,18 @@ export default function ResetPasswordScreen() {
           <Form.Control
             type="password"
             required
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-          ></Form.Control>
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="confrimPassword">
-          <Form.Label>Confrim Password</Form.Label>
+        <Form.Group className="mb-3" controlId="confirmPassword">
+          <Form.Label>Confirm New Password</Form.Label>
           <Form.Control
             type="password"
+            onChange={(e) => setConfirmPassword(e.target.value)}
             required
-            onChange={(e) => {
-              setConfrimPassword(e.target.value);
-            }}
-          ></Form.Control>
+          />
         </Form.Group>
+
         <div className="mb-3">
           <Button type="submit">Reset Password</Button>
         </div>
