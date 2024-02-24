@@ -7,6 +7,7 @@ Welcome to our Ecommerce Web Application! This application provides a platform f
 - Admin View: Manage products, orders, and user accounts.
 - Search and Filter: Easily find products using search and filter options.
 - Rating Component: Rate and review products.
+- User Authentication for customer and Admin
 - Location API: Utilize location-based services for shipping and delivery.
 - Payment Gateway: Securely process payments for purchases.
 
@@ -26,7 +27,7 @@ Welcome to our Ecommerce Web Application! This application provides a platform f
 ### Set up environment variables: Create a .env file in the backend directory with the following variables:
 
 - PORT=4000
-+ MONGODB_URI= your mongoDB URI
++ MONGODB_URI=your-mongodb-uri
 + CLOUDINARY_CLOUD_NAME=your-cloudinary-cloud-name
 + CLOUDINARY_API_KEY=your-cloudinary-api-key
 + CLOUDINARY_API_SECRET=your-cloudinary-api-secret
