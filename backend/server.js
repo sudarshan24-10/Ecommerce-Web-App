@@ -9,15 +9,12 @@ import orderRouter from "./routes/orderRoutes.js";
 import uploadRouter from "./routes/uploadRoutes.js";
 
 dotenv.config();
-
-mongoose
-  .connect(process.env.MONGODB_URI)
-  .then(() => {
-    console.log("connected to db");
-  })
-  .catch((err) => {
-    console.log(err.message);
-  });
+mongoose.connect(process.env.MONGODB_URI).then(() => {
+  console.log("Connected to DB");
+}).catch((err) => {
+  console.error("MongoDB connection error:", err);
+  process.exit(1); // Exit the process on connection error
+});
 
 const app = express();
 
