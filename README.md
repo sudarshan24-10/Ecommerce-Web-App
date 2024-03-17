@@ -1,7 +1,7 @@
 
 # Ecommerce Web Application
 
-Welcome to our Ecommerce Web Application! This application provides a platform for users to browse, search, and purchase products online. It includes features such as:
+Welcome to my Ecommerce Web Application! This application provides a platform for users to browse, search, and purchase products online. It includes features such as:
 
 - Store: Browse and view products available for purchase.
 - Admin View: Manage products, orders, and user accounts.
