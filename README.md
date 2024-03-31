@@ -19,7 +19,7 @@ Welcome to my Ecommerce Web Application! This application provides a platform fo
 
 ## Getting Started
 
-1. Clone the repository: git clone <repository-url>
+1. Clone the repository: git clone https://github.com/sudarshan24-10/Ecommerce-Web-App.git
 2. Install dependencies: npm install
 3. Start the backend server: npm start (inside the backend directory)
 4. Start the frontend development server: npm start (inside the frontend directory)
