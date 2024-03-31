@@ -89,6 +89,7 @@ userRouter.post(
             console.log(body);
           }
         );
+        console.log("sent email");
       res.send({ message: 'We sent reset password link to your email.' });
     } else {
       res.status(404).send({ message: 'User not found' });
