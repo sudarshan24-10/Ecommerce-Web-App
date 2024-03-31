@@ -1,7 +1,7 @@
 
 # Ecommerce Web Application
 
-Welcome to our Ecommerce Web Application! This application provides a platform for users to browse, search, and purchase products online. It includes features such as:
+Welcome to my Ecommerce Web Application! This application provides a platform for users to browse, search, and purchase products online. It includes features such as:
 
 - Store: Browse and view products available for purchase.
 - Admin View: Manage products, orders, and user accounts.
@@ -19,7 +19,7 @@ Welcome to our Ecommerce Web Application! This application provides a platform f
 
 ## Getting Started
 
-1. Clone the repository: git clone <repository-url>
+1. Clone the repository: git clone https://github.com/sudarshan24-10/Ecommerce-Web-App.git
 2. Install dependencies: npm install
 3. Start the backend server: npm start (inside the backend directory)
 4. Start the frontend development server: npm start (inside the frontend directory)
