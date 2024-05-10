@@ -29,9 +29,9 @@ function Product(props) {
   };
 
   return (
-    <Card>
+    <Card style={{ width: '18rem', height: '28rem' }}>
       <Link to={`/product/${product.slug}`}>
-        <img src={product.image} className="card-img-top" alt={product.name} />
+        <Card.Img variant="top" src={product.image} style={{ height: '15rem', objectFit: 'contain' }} alt={product.name} />
       </Link>
       <Card.Body>
         <Link to={`/product/${product.slug}`}>
